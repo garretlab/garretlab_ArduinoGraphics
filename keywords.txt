@@ -1,0 +1,11 @@
+garretlab_ArduinoGraphics KEYWORD1
+begin KEYWORD2
+endDraw KEYWORD2
+clear KEYWORD2
+text  KEYWORD2
+textFont  KEYWORD2
+set KEYWORD2
+write KEYWORD2
+beginText KEYWORD2
+endText KEYWORD2
+textScrollSpeed KEYWORD2
