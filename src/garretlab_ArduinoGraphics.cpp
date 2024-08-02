@@ -7,34 +7,12 @@ garretlab_ArduinoGraphics::garretlab_ArduinoGraphics(int width, int height)
   canvasHeight = height;
 }
 
-// Begin matrix.
-int garretlab_ArduinoGraphics::begin() {
-  ArduinoGraphics::begin();
-
-  return 1;
-}
-
-// End draw.
-void garretlab_ArduinoGraphics::endDraw() {
-  ArduinoGraphics::endDraw();
-}
-
-// Clear display.
-void garretlab_ArduinoGraphics::clear() {
-  for (int x = 0; x < canvasWidth; x++) {
-    for (int y = 0; y < canvasHeight; y++) {
-      set(x, y, 0, 0, 0);
-    }
-  }
-  ArduinoGraphics::clear();
-}
-
 // Display text.
 void garretlab_ArduinoGraphics::text(const String &str, int x, int y) {
   byte fontData[textFontHeight()];
   char *ptr = (char *)str.c_str();
 
-  switch (font->fontType) {
+  switch (font.fontType) {
     case eFont::ASCII:
       ArduinoGraphics::text(str, x, y);
       break;
@@ -42,7 +20,7 @@ void garretlab_ArduinoGraphics::text(const String &str, int x, int y) {
       while (*ptr) {
         ptr = getFontData(fontData, ptr, true);
         bitmap(fontData, x, y, textFontWidth(), textFontHeight());
-        x += font->width;
+        x += font.font->width;
       }
       break;
     default:
@@ -52,17 +30,17 @@ void garretlab_ArduinoGraphics::text(const String &str, int x, int y) {
 
 // Set text font.
 void garretlab_ArduinoGraphics::textFont(const Font &which) {
-  font = new garretlab_Font(which);
-  font->fontType = eFont::ASCII;
+  font.font = (Font *)&which;
+  font.fontType = eFont::ASCII;
 
   ArduinoGraphics::textFont(which);
 }
 
 // Set text font.
 void garretlab_ArduinoGraphics::textFont(const garretlab_Font &which) {
-  font = (garretlab_Font *)&which;
+  font = which;
 
-  ArduinoGraphics::textFont(which);
+  ArduinoGraphics::textFont(*(font.font));
 }
 
 // Write for Print class.
@@ -99,22 +77,11 @@ void garretlab_ArduinoGraphics::beginText(int x, int y) {
   ArduinoGraphics::beginText(x, y);
 }
 
-// Begin text.
-void garretlab_ArduinoGraphics::beginText(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
-  beginText(x, y);
-  ArduinoGraphics::beginText(x, y, r, g, b);
-}
-
-// Begin text.
-void garretlab_ArduinoGraphics::beginText(int x, int y, uint32_t color) {
-  beginText(x, y, COLOR_R(color), COLOR_G(color), COLOR_B(color));
-}
-
 // Display text.
 void garretlab_ArduinoGraphics::endText(int scrollDirection) {
   int scrollLength;
 
-  if (font->fontType == eFont::ASCII) {
+  if (font.fontType == eFont::ASCII) {
     ArduinoGraphics::endText(scrollDirection);
     return;
   }
@@ -180,4 +147,6 @@ void garretlab_ArduinoGraphics::textScrollSpeed(unsigned long scrollSpeed) {
 }
 
 // Font structure for Misaki font.
-const struct garretlab_Font Font_Misaki({8, 8, NULL}, eFont::Misaki);
+const struct garretlab_Font Font_Misaki {
+  new Font{8, 8, NULL}, eFont::Misaki
+};

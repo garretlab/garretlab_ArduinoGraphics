@@ -8,12 +8,8 @@ enum struct eFont {
   FontX
 };
 
-struct garretlab_Font : Font {
+struct garretlab_Font {
+  Font *font;
   eFont fontType;
-  garretlab_Font(const Font& font) : Font(font) {
-  }
-  garretlab_Font(const Font& font, eFont f) : Font(font) {
-    fontType = eFont::Misaki;
-  }
 };
 #endif /* GARRETLAB_FONT_H */
