@@ -15,7 +15,6 @@ class garretlab_ArduinoGraphics : public ArduinoGraphics {
   virtual void text(const String& str, int x = 0, int y = 0);             // Display text.
   virtual void textFont(const Font& which);                               // Set text font.
   virtual void textFont(const garretlab_Font& which);                     // Set text font.
-  virtual void set(int x, int y, uint8_t r, uint8_t g, uint8_t b) = 0;    // Set pixel.
   virtual size_t write(uint8_t c);                                        // Write for Print class.
   virtual void beginText(int x = 0, int y = 0);                           // Begin text.
   virtual void beginText(int x, int y, uint8_t r, uint8_t g, uint8_t b);  // Begin text.
