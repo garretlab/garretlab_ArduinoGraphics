@@ -77,6 +77,17 @@ void garretlab_ArduinoGraphics::beginText(int x, int y) {
   ArduinoGraphics::beginText(x, y);
 }
 
+// Begin text.
+void garretlab_ArduinoGraphics::beginText(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
+  beginText(x, y);
+  ArduinoGraphics::beginText(x, y, r, g, b);
+}
+
+// Begin text.
+void garretlab_ArduinoGraphics::beginText(int x, int y, uint32_t color) {
+  beginText(x, y, COLOR_R(color), COLOR_G(color), COLOR_B(color));
+}
+
 // Display text.
 void garretlab_ArduinoGraphics::endText(int scrollDirection) {
   int scrollLength;

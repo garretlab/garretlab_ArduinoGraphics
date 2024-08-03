@@ -18,6 +18,8 @@ class garretlab_ArduinoGraphics : public ArduinoGraphics {
   virtual void set(int x, int y, uint8_t r, uint8_t g, uint8_t b) = 0;    // Set pixel.
   virtual size_t write(uint8_t c);                                        // Write for Print class.
   virtual void beginText(int x = 0, int y = 0);                           // Begin text.
+  virtual void beginText(int x, int y, uint8_t r, uint8_t g, uint8_t b);  // Begin text.
+  virtual void beginText(int x, int y, uint32_t color);                   // Begin text.
   virtual void endText(int scrollDirection = NO_SCROLL);                  // Display text.
   virtual void textScrollSpeed(unsigned long scrollSpeed);                // Set text scroll speed.
 
@@ -26,7 +28,7 @@ class garretlab_ArduinoGraphics : public ArduinoGraphics {
   int textBufferLength;             // Text buffer length, not the memory size.
   int textX;                        // X position of text.
   int textY;                        // Y position of text.
-  struct garretlab_Font font;      // Font name.
+  struct garretlab_Font font;       // Font name.
   int canvasWidth;                  // Canvas width.
   int canvasHeight;                 // Canvas height.
   unsigned long scrollSpeed = 150;  // Text scroll speed.
