@@ -2,7 +2,7 @@
 #define GARRETLAB_FONT_H
 #include <Font.h>
 
-enum {
+enum struct eFont {
   ASCII,
   Misaki,
   FontX
@@ -10,6 +10,6 @@ enum {
 
 struct garretlab_Font {
   Font *font;
-  int fontType;
+  eFont fontType;
 };
 #endif /* GARRETLAB_FONT_H */
