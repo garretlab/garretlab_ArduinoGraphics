@@ -13,10 +13,10 @@ void garretlab_ArduinoGraphics::text(const String &str, int x, int y) {
   char *ptr = (char *)str.c_str();
 
   switch (font.fontType) {
-    case eFont::ASCII:
+    case ASCII:
       ArduinoGraphics::text(str, x, y);
       break;
-    case eFont::Misaki:
+    case Misaki:
       while (*ptr) {
         ptr = getFontData(fontData, ptr, true);
         bitmap(fontData, x, y, textFontWidth(), textFontHeight());
@@ -31,7 +31,7 @@ void garretlab_ArduinoGraphics::text(const String &str, int x, int y) {
 // Set text font.
 void garretlab_ArduinoGraphics::textFont(const Font &which) {
   font.font = (Font *)&which;
-  font.fontType = eFont::ASCII;
+  font.fontType = ASCII;
 
   ArduinoGraphics::textFont(which);
 }
@@ -92,7 +92,7 @@ void garretlab_ArduinoGraphics::beginText(int x, int y, uint32_t color) {
 void garretlab_ArduinoGraphics::endText(int scrollDirection) {
   int scrollLength;
 
-  if (font.fontType == eFont::ASCII) {
+  if (font.fontType == ASCII) {
     ArduinoGraphics::endText(scrollDirection);
     return;
   }
@@ -159,5 +159,5 @@ void garretlab_ArduinoGraphics::textScrollSpeed(unsigned long scrollSpeed) {
 
 // Font structure for Misaki font.
 const struct garretlab_Font Font_Misaki {
-  new Font{8, 8, NULL}, eFont::Misaki
+  new Font{8, 8, NULL}, Misaki
 };
